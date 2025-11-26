@@ -1,4 +1,4 @@
-import { Lock } from "lucide-react";
+import { Lock, Unlock, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
@@ -31,21 +31,27 @@ export default function Header() {
             <span className="text-xl font-semibold" data-testid="text-app-name">Invisible Ink</span>
           </div>
           
-          <nav className="hidden md:flex items-center gap-6">
-            <button
+          <nav className="hidden md:flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => scrollToSection("encode")}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium"
               data-testid="link-encode"
             >
-              Encode
-            </button>
-            <button
+              <Lock className="w-4 h-4 mr-2" />
+              Hide
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => scrollToSection("decode")}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium"
               data-testid="link-decode"
             >
-              Decode
-            </button>
+              <Unlock className="w-4 h-4 mr-2" />
+              Reveal
+            </Button>
           </nav>
 
           <Button
@@ -54,7 +60,7 @@ export default function Header() {
             onClick={toggleTheme}
             data-testid="button-theme-toggle"
           >
-            {theme === "light" ? "🌙" : "☀️"}
+            {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
           </Button>
         </div>
       </div>

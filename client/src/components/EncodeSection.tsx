@@ -128,22 +128,23 @@ export default function EncodeSection() {
           <h2 className="text-3xl sm:text-4xl font-semibold mb-4" data-testid="text-encode-title">
             Hide a Message
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-6" data-testid="text-encode-description">
-            Upload an image and enter your secret message. We'll make it invisible.
-          </p>
           
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
-              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">1</span>
-              <span className="text-muted-foreground">Upload or fetch an image</span>
+          <div className="max-w-xl mx-auto space-y-3 text-left">
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">1</span>
+              <p className="text-muted-foreground">Type your secret message.</p>
             </div>
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
-              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">2</span>
-              <span className="text-muted-foreground">Type your secret message</span>
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">2</span>
+              <p className="text-muted-foreground">Fetch a random image or upload one.</p>
             </div>
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
-              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">3</span>
-              <span className="text-muted-foreground">Download the encoded image</span>
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">3</span>
+              <p className="text-muted-foreground">Click Encode and download the hidden message image.</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">4</span>
+              <p className="text-muted-foreground">Share the image with someone you trust — only they can uncover the secret.</p>
             </div>
           </div>
         </div>

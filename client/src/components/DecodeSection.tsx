@@ -102,24 +102,21 @@ export default function DecodeSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-4" data-testid="text-decode-title">
-            Reveal a Message
+            To Decode
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-6" data-testid="text-decode-description">
-            Upload an encoded image to uncover the hidden message within.
-          </p>
           
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
-              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">1</span>
-              <span className="text-muted-foreground">Upload an encoded image</span>
+          <div className="max-w-xl mx-auto space-y-3 text-left">
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">1</span>
+              <p className="text-muted-foreground">Upload the encoded image.</p>
             </div>
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
-              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">2</span>
-              <span className="text-muted-foreground">Click reveal to decode</span>
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">2</span>
+              <p className="text-muted-foreground">Click Decode.</p>
             </div>
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
-              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">3</span>
-              <span className="text-muted-foreground">Copy the hidden message</span>
+            <div className="flex items-start gap-3">
+              <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium shrink-0 mt-0.5">3</span>
+              <p className="text-muted-foreground">The hidden message will appear... like magic.</p>
             </div>
           </div>
         </div>
