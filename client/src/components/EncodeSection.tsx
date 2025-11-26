@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, Image as ImageIcon, Download, Loader2, Copy, CheckCircle2 } from "lucide-react";
+import { Upload, Image as ImageIcon, Download, Loader2, Copy, CheckCircle2, Shuffle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const textToMorse = (text: string): string => {
@@ -29,6 +29,7 @@ export default function EncodeSection() {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isEncoding, setIsEncoding] = useState(false);
+  const [isFetchingRandom, setIsFetchingRandom] = useState(false);
   const [encodedImage, setEncodedImage] = useState<string>("");
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -78,15 +79,49 @@ export default function EncodeSection() {
       const reader = new FileReader();
       reader.onload = (e) => setImagePreview(e.target?.result as string);
       reader.readAsDataURL(file);
+      setEncodedImage("");
     }
   };
 
+  const dataURLtoFile = (dataurl: string, filename: string): File => {
+    const arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)?.[1] || 'image/png';
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  };
+
   const handleFetchRandom = async () => {
-    console.log('Fetching random image from Unsplash');
-    toast({
-      title: "Random image",
-      description: "Feature coming soon - will fetch from Unsplash API"
-    });
+    setIsFetchingRandom(true);
+    try {
+      const response = await fetch('/api/random-image');
+      const data = await response.json();
+      
+      if (data.success && data.image) {
+        setImagePreview(data.image);
+        const file = dataURLtoFile(data.image, 'random-image.jpg');
+        setImage(file);
+        setEncodedImage("");
+        toast({
+          title: "Image fetched!",
+          description: "Random image loaded successfully"
+        });
+      } else {
+        throw new Error(data.error || 'Failed to fetch image');
+      }
+    } catch (error) {
+      toast({
+        title: "Failed to fetch image",
+        description: error instanceof Error ? error.message : "Please try again",
+        variant: "destructive"
+      });
+    } finally {
+      setIsFetchingRandom(false);
+    }
   };
 
   const handleEncode = async () => {
@@ -100,21 +135,49 @@ export default function EncodeSection() {
     }
 
     setIsEncoding(true);
-    console.log('Encoding message:', message);
-    console.log('Morse code:', morseCode);
     
-    setTimeout(() => {
-      setEncodedImage(imagePreview);
-      setIsEncoding(false);
-      toast({
-        title: "Encoding complete!",
-        description: "Your message has been hidden in the image"
+    try {
+      const formData = new FormData();
+      formData.append('image', image);
+      formData.append('message', message);
+
+      const response = await fetch('/api/encode', {
+        method: 'POST',
+        body: formData
       });
-    }, 2000);
+
+      const data = await response.json();
+
+      if (data.success && data.encodedImage) {
+        setEncodedImage(data.encodedImage);
+        toast({
+          title: "Encoding complete!",
+          description: "Your message has been hidden in the image"
+        });
+      } else {
+        throw new Error(data.error || 'Failed to encode message');
+      }
+    } catch (error) {
+      toast({
+        title: "Encoding failed",
+        description: error instanceof Error ? error.message : "Please try again",
+        variant: "destructive"
+      });
+    } finally {
+      setIsEncoding(false);
+    }
   };
 
   const handleDownload = () => {
-    console.log('Downloading encoded image');
+    if (!encodedImage) return;
+    
+    const link = document.createElement('a');
+    link.href = encodedImage;
+    link.download = 'invisible-ink-encoded.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
     toast({
       title: "Download started",
       description: "Your encoded image is being downloaded"
@@ -181,11 +244,21 @@ export default function EncodeSection() {
             <Button
               variant="outline"
               onClick={handleFetchRandom}
+              disabled={isFetchingRandom}
               className="w-full"
               data-testid="button-fetch-random"
             >
-              <ImageIcon className="w-4 h-4 mr-2" />
-              Fetch Random Image
+              {isFetchingRandom ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Fetching...
+                </>
+              ) : (
+                <>
+                  <Shuffle className="w-4 h-4 mr-2" />
+                  Fetch Random Image
+                </>
+              )}
             </Button>
           </Card>
 

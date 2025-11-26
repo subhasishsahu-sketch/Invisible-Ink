@@ -4,30 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Upload, Copy, Loader2, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const morseToText = (morse: string): string => {
-  const morseToChar: { [key: string]: string } = {
-    '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F',
-    '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L',
-    '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R',
-    '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X',
-    '-.--': 'Y', '--..': 'Z', '-----': '0', '.----': '1', '..---': '2',
-    '...--': '3', '....-': '4', '.....': '5', '-....': '6', '--...': '7',
-    '---..': '8', '----.': '9', '/': ' '
-  };
-  
-  return morse
-    .split(' ')
-    .map(code => morseToChar[code] || '')
-    .join('');
-};
-
 export default function DecodeSection() {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isDecoding, setIsDecoding] = useState(false);
-  const [decodedBinary, setDecodedBinary] = useState("");
   const [decodedMorse, setDecodedMorse] = useState("");
   const [decodedText, setDecodedText] = useState("");
+  const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -48,9 +31,9 @@ export default function DecodeSection() {
       reader.onload = (e) => setImagePreview(e.target?.result as string);
       reader.readAsDataURL(file);
       
-      setDecodedBinary("");
       setDecodedMorse("");
       setDecodedText("");
+      setError("");
     }
   };
 
@@ -65,26 +48,42 @@ export default function DecodeSection() {
     }
 
     setIsDecoding(true);
-    console.log('Decoding image:', image.name);
+    setError("");
+    setDecodedMorse("");
+    setDecodedText("");
     
-    setTimeout(() => {
-      const mockBinary = "01001000 01000101 01001100 01001100 01001111...";
-      const mockMorse = ".... . .-.. .-.. --- / .-- --- .-. .-.. -..";
-      const mockText = morseToText(mockMorse);
-      
-      setDecodedBinary(mockBinary);
-      setTimeout(() => {
-        setDecodedMorse(mockMorse);
-        setTimeout(() => {
-          setDecodedText(mockText);
-          setIsDecoding(false);
-          toast({
-            title: "Decoding complete!",
-            description: "Your secret message has been revealed"
-          });
-        }, 500);
-      }, 500);
-    }, 1500);
+    try {
+      const formData = new FormData();
+      formData.append('image', image);
+
+      const response = await fetch('/api/decode', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setDecodedMorse(data.morse);
+        setDecodedText(data.text);
+        toast({
+          title: "Message revealed!",
+          description: "The hidden message has been decoded"
+        });
+      } else {
+        throw new Error(data.error || 'Failed to decode message');
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to decode message";
+      setError(errorMessage);
+      toast({
+        title: "Decoding failed",
+        description: errorMessage,
+        variant: "destructive"
+      });
+    } finally {
+      setIsDecoding(false);
+    }
   };
 
   const handleCopy = () => {
@@ -170,31 +169,27 @@ export default function DecodeSection() {
           <Card className="p-6">
             <h3 className="text-xl font-medium mb-4" data-testid="text-decoded-output-heading">Decoded Output</h3>
             
-            {!decodedBinary && !isDecoding && (
+            {!decodedMorse && !isDecoding && !error && (
               <div className="flex items-center justify-center h-64 text-muted-foreground">
                 <p className="text-sm">Upload and decode an image to see results</p>
               </div>
             )}
 
-            {decodedBinary && (
+            {error && (
+              <div className="bg-destructive/10 border border-destructive/20 rounded-md p-4">
+                <p className="text-sm text-destructive" data-testid="text-decode-error">{error}</p>
+              </div>
+            )}
+
+            {decodedMorse && (
               <div className="space-y-4">
                 <div className="bg-muted/50 rounded-md p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-full bg-primary" />
-                    <p className="text-xs uppercase tracking-wide text-muted-foreground">Binary Data</p>
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground">Morse Code</p>
                   </div>
-                  <p className="font-mono text-xs break-all" data-testid="text-binary-output">{decodedBinary}</p>
+                  <p className="font-mono text-sm break-all" data-testid="text-morse-output">{decodedMorse}</p>
                 </div>
-
-                {decodedMorse && (
-                  <div className="bg-muted/50 rounded-md p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">Morse Code</p>
-                    </div>
-                    <p className="font-mono text-sm break-all" data-testid="text-morse-output">{decodedMorse}</p>
-                  </div>
-                )}
 
                 {decodedText && (
                   <div className="bg-primary/10 border border-primary/20 rounded-md p-4">
