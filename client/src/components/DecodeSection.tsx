@@ -104,9 +104,24 @@ export default function DecodeSection() {
           <h2 className="text-3xl sm:text-4xl font-semibold mb-4" data-testid="text-decode-title">
             Reveal a Message
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto" data-testid="text-decode-description">
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-6" data-testid="text-decode-description">
             Upload an encoded image to uncover the hidden message within.
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">1</span>
+              <span className="text-muted-foreground">Upload an encoded image</span>
+            </div>
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">2</span>
+              <span className="text-muted-foreground">Click reveal to decode</span>
+            </div>
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">3</span>
+              <span className="text-muted-foreground">Copy the hidden message</span>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -147,10 +162,10 @@ export default function DecodeSection() {
               {isDecoding ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Decoding...
+                  Revealing...
                 </>
               ) : (
-                'Decode Message'
+                'Reveal Message'
               )}
             </Button>
           </Card>
@@ -189,22 +204,29 @@ export default function DecodeSection() {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary" />
-                        <p className="text-xs uppercase tracking-wide font-medium">Decoded Message</p>
+                        <p className="text-xs uppercase tracking-wide font-medium">Hidden Message Revealed</p>
                       </div>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={handleCopy}
-                        data-testid="button-copy-message"
-                      >
-                        {copied ? (
-                          <CheckCircle2 className="w-4 h-4" />
-                        ) : (
-                          <Copy className="w-4 h-4" />
-                        )}
-                      </Button>
                     </div>
-                    <p className="text-base font-medium" data-testid="text-decoded-message">{decodedText}</p>
+                    <p className="text-base font-medium mb-3" data-testid="text-decoded-message">{decodedText}</p>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={handleCopy}
+                      className="w-full"
+                      data-testid="button-copy-decoded"
+                    >
+                      {copied ? (
+                        <>
+                          <CheckCircle2 className="w-4 h-4 mr-2" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4 mr-2" />
+                          Copy Message
+                        </>
+                      )}
+                    </Button>
                   </div>
                 )}
               </div>

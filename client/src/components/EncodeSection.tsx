@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, Image as ImageIcon, Download, Loader2 } from "lucide-react";
+import { Upload, Image as ImageIcon, Download, Loader2, Copy, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const textToMorse = (text: string): string => {
@@ -30,8 +30,36 @@ export default function EncodeSection() {
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isEncoding, setIsEncoding] = useState(false);
   const [encodedImage, setEncodedImage] = useState<string>("");
+  const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+
+  const handleCopyMessage = () => {
+    navigator.clipboard.writeText(message);
+    setCopied(true);
+    toast({
+      title: "Copied!",
+      description: "Message copied to clipboard"
+    });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handlePasteMessage = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      setMessage(text);
+      toast({
+        title: "Pasted!",
+        description: "Text pasted from clipboard"
+      });
+    } catch {
+      toast({
+        title: "Unable to paste",
+        description: "Please paste manually using Ctrl+V",
+        variant: "destructive"
+      });
+    }
+  };
 
   const morseCode = textToMorse(message);
 
@@ -100,9 +128,24 @@ export default function EncodeSection() {
           <h2 className="text-3xl sm:text-4xl font-semibold mb-4" data-testid="text-encode-title">
             Hide a Message
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto" data-testid="text-encode-description">
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-6" data-testid="text-encode-description">
             Upload an image and enter your secret message. We'll make it invisible.
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">1</span>
+              <span className="text-muted-foreground">Upload or fetch an image</span>
+            </div>
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">2</span>
+              <span className="text-muted-foreground">Type your secret message</span>
+            </div>
+            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-md">
+              <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium">3</span>
+              <span className="text-muted-foreground">Download the encoded image</span>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -157,8 +200,27 @@ export default function EncodeSection() {
               data-testid="input-secret-message"
             />
             
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-xs text-muted-foreground">Character limit</span>
+            <div className="flex justify-between items-center mb-4 gap-2 flex-wrap">
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handlePasteMessage}
+                  data-testid="button-paste-message"
+                >
+                  Paste Text
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleCopyMessage}
+                  disabled={!message}
+                  data-testid="button-copy-message"
+                >
+                  {copied ? <CheckCircle2 className="w-4 h-4 mr-1" /> : <Copy className="w-4 h-4 mr-1" />}
+                  Copy
+                </Button>
+              </div>
               <span className="text-xs text-muted-foreground" data-testid="text-char-count">{message.length}/500</span>
             </div>
 
