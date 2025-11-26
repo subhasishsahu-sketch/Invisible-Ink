@@ -99,6 +99,8 @@ export default function EncodeSection() {
     setIsFetchingRandom(true);
     try {
       const response = await fetch('/api/random-image');
+      if (!response.ok) throw new Error('Failed to fetch image');
+      
       const data = await response.json();
       
       if (data.success && data.image) {
@@ -114,9 +116,10 @@ export default function EncodeSection() {
         throw new Error(data.error || 'Failed to fetch image');
       }
     } catch (error) {
+      console.error('Fetch random image error:', error);
       toast({
-        title: "Failed to fetch image",
-        description: error instanceof Error ? error.message : "Please try again",
+        title: "Couldn't fetch random image",
+        description: "Try uploading an image instead",
         variant: "destructive"
       });
     } finally {
@@ -269,8 +272,8 @@ export default function EncodeSection() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your secret message here..."
-              className="min-h-32 mb-4 resize-none"
-              maxLength={500}
+              className="min-h-40 mb-4 resize-none focus:ring-2 focus:ring-primary transition-all"
+              maxLength={1200}
               data-testid="input-secret-message"
             />
             
@@ -295,15 +298,20 @@ export default function EncodeSection() {
                   Copy
                 </Button>
               </div>
-              <span className="text-xs text-muted-foreground" data-testid="text-char-count">{message.length}/500</span>
-            </div>
-
-            {morseCode && (
-              <div className="bg-muted/50 rounded-md p-4 mb-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Morse Code Preview</p>
-                <p className="font-mono text-sm break-all" data-testid="text-morse-preview">{morseCode}</p>
+              <div className="flex items-center gap-2">
+                <span className={`text-xs font-medium ${message.length > 1000 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`} data-testid="text-char-count">
+                  {message.length}/1200
+                </span>
+                {message.length > 0 && (
+                  <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full transition-all ${message.length > 1000 ? 'bg-amber-600 dark:bg-amber-400' : 'bg-primary'}`}
+                      style={{width: `${Math.min((message.length / 1200) * 100, 100)}%`}}
+                    />
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             <Button
               onClick={handleEncode}

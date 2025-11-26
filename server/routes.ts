@@ -66,13 +66,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/random-image", async (req, res) => {
     try {
-      const response = await fetch(
-        "https://source.unsplash.com/random/800x600/?nature,abstract,texture",
-        { redirect: "follow" }
-      );
+      const urls = [
+        "https://source.unsplash.com/random/800x600/?landscape",
+        "https://source.unsplash.com/random/800x600/?nature",
+        "https://source.unsplash.com/random/800x600/?abstract",
+        "https://source.unsplash.com/random/800x600/?texture",
+        "https://source.unsplash.com/random/800x600/?art"
+      ];
+      
+      const randomUrl = urls[Math.floor(Math.random() * urls.length)];
+      
+      const response = await fetch(randomUrl, {
+        redirect: "follow",
+        headers: {
+          'User-Agent': 'Mozilla/5.0'
+        },
+        timeout: 10000
+      });
       
       if (!response.ok) {
-        throw new Error("Failed to fetch random image");
+        throw new Error(`HTTP ${response.status}`);
       }
       
       const arrayBuffer = await response.arrayBuffer();
@@ -87,7 +100,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Random image error:", error);
       res.status(500).json({ 
-        error: "Failed to fetch random image" 
+        error: "Failed to fetch random image from Unsplash. Please upload an image instead." 
       });
     }
   });
