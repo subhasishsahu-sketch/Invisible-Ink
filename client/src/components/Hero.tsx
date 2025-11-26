@@ -8,8 +8,8 @@ export default function Hero() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const scrollToHow = () => {
-    const element = document.getElementById("how-it-works");
+  const scrollToDecode = () => {
+    const element = document.getElementById("decode");
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -30,7 +30,7 @@ export default function Hero() {
         </h1>
         
         <p className="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto" data-testid="text-hero-subtitle">
-          Use advanced LSB steganography and Morse code to secretly embed and extract messages from any image. Your secrets, hidden in plain sight.
+          Secretly embed and extract hidden messages from any image. Your secrets, invisible in plain sight.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -40,26 +40,26 @@ export default function Hero() {
             className="bg-primary/90 backdrop-blur-md hover:bg-primary text-primary-foreground min-w-[200px]"
             data-testid="button-start-encoding"
           >
-            Start Encoding
+            Hide a Message
           </Button>
           
           <Button
             size="lg"
             variant="outline"
-            onClick={scrollToHow}
+            onClick={scrollToDecode}
             className="bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 min-w-[200px]"
-            data-testid="button-how-it-works"
+            data-testid="button-reveal-message"
           >
-            How It Works
+            Reveal a Message
           </Button>
         </div>
 
         <button
-          onClick={scrollToHow}
+          onClick={scrollToEncode}
           className="mt-12 inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
           data-testid="button-scroll-down"
         >
-          <span>Learn more</span>
+          <span>Get started</span>
           <ChevronDown className="w-4 h-4 animate-bounce" />
         </button>
       </div>

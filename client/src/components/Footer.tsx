@@ -11,7 +11,7 @@ export default function Footer() {
               <span className="font-semibold">Invisible Ink</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Secure steganography tool for hiding secret messages in images using LSB encoding and Morse code.
+              Hide secret messages in plain sight. Only those who know can reveal them.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Invisible Ink. Built with security and privacy in mind.
+            © {new Date().getFullYear()} Invisible Ink. Your secrets, safe and invisible.
           </p>
         </div>
       </div>

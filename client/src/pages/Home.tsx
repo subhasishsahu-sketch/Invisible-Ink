@@ -2,7 +2,6 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import EncodeSection from "@/components/EncodeSection";
 import DecodeSection from "@/components/DecodeSection";
-import HowItWorks from "@/components/HowItWorks";
 import UseCases from "@/components/UseCases";
 import Footer from "@/components/Footer";
 
@@ -14,7 +13,6 @@ export default function Home() {
         <Hero />
         <EncodeSection />
         <DecodeSection />
-        <HowItWorks />
         <UseCases />
       </main>
       <Footer />

@@ -46,13 +46,6 @@ export default function Header() {
             >
               Decode
             </button>
-            <button
-              onClick={() => scrollToSection("how-it-works")}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="link-how-it-works"
-            >
-              How It Works
-            </button>
           </nav>
 
           <Button
