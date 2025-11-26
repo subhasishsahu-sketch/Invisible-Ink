@@ -76,13 +76,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const randomUrl = urls[Math.floor(Math.random() * urls.length)];
       
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      
       const response = await fetch(randomUrl, {
         redirect: "follow",
         headers: {
           'User-Agent': 'Mozilla/5.0'
         },
-        timeout: 10000
+        signal: controller.signal
       });
+      
+      clearTimeout(timeout);
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);

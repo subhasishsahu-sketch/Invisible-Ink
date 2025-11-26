@@ -181,46 +181,34 @@ export default function DecodeSection() {
               </div>
             )}
 
-            {decodedMorse && (
-              <div className="space-y-4">
-                <div className="bg-muted/50 rounded-md p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <p className="text-xs uppercase tracking-wide text-muted-foreground">Morse Code</p>
+            {decodedText && (
+              <div className="bg-primary/10 border border-primary/20 rounded-md p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary" />
+                    <p className="text-xs uppercase tracking-wide font-medium">Hidden Message Revealed</p>
                   </div>
-                  <p className="font-mono text-sm break-all" data-testid="text-morse-output">{decodedMorse}</p>
                 </div>
-
-                {decodedText && (
-                  <div className="bg-primary/10 border border-primary/20 rounded-md p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-primary" />
-                        <p className="text-xs uppercase tracking-wide font-medium">Hidden Message Revealed</p>
-                      </div>
-                    </div>
-                    <p className="text-base font-medium mb-3" data-testid="text-decoded-message">{decodedText}</p>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={handleCopy}
-                      className="w-full"
-                      data-testid="button-copy-decoded"
-                    >
-                      {copied ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 mr-2" />
-                          Copied!
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4 mr-2" />
-                          Copy Message
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                )}
+                <p className="text-base font-medium mb-3" data-testid="text-decoded-message">{decodedText}</p>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleCopy}
+                  className="w-full"
+                  data-testid="button-copy-decoded"
+                >
+                  {copied ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4 mr-2" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copy Message
+                    </>
+                  )}
+                </Button>
               </div>
             )}
           </Card>
