@@ -22,22 +22,22 @@ export default function Hero() {
         }}
       />
       
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" data-testid="text-hero-title">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16 lg:py-20">
+        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-title">
           Hide Secret Messages
           <br />
           Inside Images
         </h1>
         
-        <p className="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto" data-testid="text-hero-subtitle">
+        <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-6 sm:mb-8 max-w-2xl mx-auto" data-testid="text-hero-subtitle">
           Secretly embed and extract hidden messages from any image. Your secrets, invisible in plain sight.
         </p>
         
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
           <Button
             size="lg"
             onClick={scrollToEncode}
-            className="bg-primary/90 backdrop-blur-md hover:bg-primary text-primary-foreground min-w-[200px]"
+            className="bg-primary/90 backdrop-blur-md hover:bg-primary text-primary-foreground w-full sm:w-auto sm:min-w-[200px]"
             data-testid="button-start-encoding"
           >
             Hide a Message
@@ -47,7 +47,7 @@ export default function Hero() {
             size="lg"
             variant="outline"
             onClick={scrollToDecode}
-            className="bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 min-w-[200px]"
+            className="bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 w-full sm:w-auto sm:min-w-[200px]"
             data-testid="button-reveal-message"
           >
             Reveal a Message

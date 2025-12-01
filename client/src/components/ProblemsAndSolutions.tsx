@@ -52,11 +52,11 @@ export default function ProblemsAndSolutions() {
           </p>
         </div>
 
-        <div className="space-y-4 max-w-4xl mx-auto" data-testid="problems-grid">
+        <div className="space-y-3 sm:space-y-4 max-w-4xl mx-auto" data-testid="problems-grid">
           {problems.map((item, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-4" data-testid={`problem-row-${index}`}>
+            <div key={index} className="grid md:grid-cols-2 gap-3 sm:gap-4" data-testid={`problem-row-${index}`}>
               {/* Problem Card */}
-              <Card className="p-6 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-4 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
+              <Card className="p-4 sm:p-6 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-4 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
                 <div className="flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" data-testid={`problem-icon-${index}`} />
                   <div className="flex-1">
@@ -71,7 +71,7 @@ export default function ProblemsAndSolutions() {
               </Card>
 
               {/* Solution Card */}
-              <Card className="p-6 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-4 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
+              <Card className="p-4 sm:p-6 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-4 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
                   <div className="flex-1">

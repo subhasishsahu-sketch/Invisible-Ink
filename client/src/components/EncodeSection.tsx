@@ -215,13 +215,13 @@ export default function EncodeSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <Card className="p-6">
-            <h3 className="text-xl font-medium mb-4" data-testid="text-upload-heading">1. Choose an Image</h3>
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+          <Card className="p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-medium mb-4" data-testid="text-upload-heading">1. Choose an Image</h3>
             
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed rounded-md p-8 text-center cursor-pointer hover-elevate transition-colors mb-4 min-h-64 flex flex-col items-center justify-center"
+              className="border-2 border-dashed rounded-md p-6 sm:p-8 text-center cursor-pointer hover-elevate transition-colors mb-4 min-h-48 sm:min-h-64 flex flex-col items-center justify-center"
               data-testid="dropzone-image-upload"
             >
               <input
@@ -265,14 +265,14 @@ export default function EncodeSection() {
             </Button>
           </Card>
 
-          <Card className="p-6">
-            <h3 className="text-xl font-medium mb-4" data-testid="text-message-heading">2. Enter Your Message</h3>
+          <Card className="p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-medium mb-4" data-testid="text-message-heading">2. Enter Your Message</h3>
             
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your secret message here..."
-              className="min-h-40 mb-4 resize-none focus:ring-2 focus:ring-primary transition-all"
+              className="min-h-32 sm:min-h-40 mb-4 resize-none focus:ring-2 focus:ring-primary transition-all text-base"
               maxLength={1200}
               data-testid="input-secret-message"
             />
@@ -332,17 +332,17 @@ export default function EncodeSection() {
         </div>
 
         {encodedImage && (
-          <Card className="mt-8 p-6">
+          <Card className="mt-8 p-4 sm:p-6">
             <div className="text-center">
-              <h3 className="text-xl font-medium mb-4" data-testid="text-result-heading">Encoding Complete!</h3>
+              <h3 className="text-lg sm:text-xl font-medium mb-4" data-testid="text-result-heading">Encoding Complete!</h3>
               <div className="flex flex-col items-center gap-4">
-                <img src={encodedImage} alt="Encoded" className="max-h-64 rounded-md" data-testid="img-encoded-result" />
-                <div className="flex gap-4">
-                  <Button onClick={handleDownload} data-testid="button-download">
+                <img src={encodedImage} alt="Encoded" className="max-h-48 sm:max-h-64 rounded-md" data-testid="img-encoded-result" />
+                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                  <Button onClick={handleDownload} className="w-full sm:w-auto" data-testid="button-download">
                     <Download className="w-4 h-4 mr-2" />
                     Download Image
                   </Button>
-                  <Button variant="outline" onClick={() => { setEncodedImage(""); setMessage(""); setImage(null); setImagePreview(""); }} data-testid="button-encode-another">
+                  <Button variant="outline" onClick={() => { setEncodedImage(""); setMessage(""); setImage(null); setImagePreview(""); }} className="w-full sm:w-auto" data-testid="button-encode-another">
                     Encode Another
                   </Button>
                 </div>

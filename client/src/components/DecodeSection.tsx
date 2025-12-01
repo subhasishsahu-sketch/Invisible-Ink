@@ -120,13 +120,13 @@ export default function DecodeSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <Card className="p-6">
-            <h3 className="text-xl font-medium mb-4" data-testid="text-upload-decode-heading">Upload Encoded Image</h3>
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+          <Card className="p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-medium mb-4" data-testid="text-upload-decode-heading">Upload Encoded Image</h3>
             
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed rounded-md p-8 text-center cursor-pointer hover-elevate transition-colors mb-4 min-h-64 flex flex-col items-center justify-center"
+              className="border-2 border-dashed rounded-md p-6 sm:p-8 text-center cursor-pointer hover-elevate transition-colors mb-4 min-h-48 sm:min-h-64 flex flex-col items-center justify-center"
               data-testid="dropzone-decode-upload"
             >
               <input
@@ -166,8 +166,8 @@ export default function DecodeSection() {
             </Button>
           </Card>
 
-          <Card className="p-6">
-            <h3 className="text-xl font-medium mb-4" data-testid="text-decoded-output-heading">Decoded Output</h3>
+          <Card className="p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-medium mb-4" data-testid="text-decoded-output-heading">Decoded Output</h3>
             
             {!decodedMorse && !isDecoding && !error && (
               <div className="flex items-center justify-center h-64 text-muted-foreground">
