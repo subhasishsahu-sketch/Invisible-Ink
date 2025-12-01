@@ -1,0 +1,19 @@
+Add a full “Problems & Solutions” section to my StegaMorse website. This section should explain, in simple and non-technical language, all the common ways the hidden message inside the encoded image can be lost or corrupted. For each problem, include a short explanation of why it happens and a clear solution telling the user what to do instead. Write it in a clean, friendly, website-ready tone. Use separate headings for each issue.
+
+Include the following problems:
+
+1. Image compression: Explain that many apps reduce image quality automatically, which removes the hidden message. Solution: Tell users to always share the encoded image as a file, not as a photo.
+
+2. File format changes: Explain that changing the image format (like PNG to JPG or JPG to PNG) rewrites the image and destroys the secret data. Solution: Tell users to always use the original PNG file exactly as downloaded.
+
+3. Image resizing: Explain that stretching or shrinking the image changes the pixels and erases the hidden message. Solution: Ask users not to resize or alter the image size.
+
+4. Cropping or rotating: Explain that cropping removes parts of the image and rotating may rewrite pixels, both of which break the hidden message. Solution: Tell users to avoid cropping or rotating the encoded image.
+
+5. Applying filters or edits: Explain that filters, brightness changes, contrast adjustments, or any editing changes the pixels and deletes the hidden data. Solution: Tell users not to edit the encoded image in any way.
+
+6. Taking a screenshot: Explain that a screenshot creates a brand-new image without any hidden data inside. Solution: Tell users to always share the original downloaded file and never use screenshots.
+
+7. Auto-compression by apps: Explain that many apps (like social media and messaging apps) automatically compress images and break the hidden message. Solution: Tell users to use file-sharing options that keep the original quality, such as sending as a file, email attachments, Google Drive, Dropbox, or Telegram (send as file).
+
+Write each item clearly with a short heading, a simple explanation, and a direct solution. Make the entire section friendly, easy to read, and suitable for a website.
