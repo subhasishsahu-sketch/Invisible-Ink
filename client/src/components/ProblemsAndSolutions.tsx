@@ -52,33 +52,39 @@ export default function ProblemsAndSolutions() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6" data-testid="problems-grid">
+        <div className="space-y-4 max-w-4xl mx-auto" data-testid="problems-grid">
           {problems.map((item, index) => (
-            <Card key={index} className="p-6 hover-elevate transition-all" data-testid={`problem-card-${index}`}>
-              <div className="flex items-start gap-4">
-                <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400 shrink-0 mt-1" data-testid={`problem-icon-${index}`} />
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold mb-2" data-testid={`problem-title-${index}`}>
-                    {item.title}
-                  </h3>
-                  
-                  <div className="mb-4">
-                    <p className="text-sm text-muted-foreground mb-3" data-testid={`problem-description-${index}`}>
+            <div key={index} className="grid md:grid-cols-2 gap-4" data-testid={`problem-row-${index}`}>
+              {/* Problem Card */}
+              <Card className="p-6 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-4 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" data-testid={`problem-icon-${index}`} />
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold mb-2 text-amber-900 dark:text-amber-100" data-testid={`problem-title-${index}`}>
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-amber-800 dark:text-amber-200" data-testid={`problem-description-${index}`}>
                       {item.problem}
                     </p>
                   </div>
+                </div>
+              </Card>
 
-                  <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900/50 rounded-md p-3">
-                    <div className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
-                      <p className="text-sm font-medium text-green-900 dark:text-green-100" data-testid={`solution-text-${index}`}>
-                        {item.solution}
-                      </p>
-                    </div>
+              {/* Solution Card */}
+              <Card className="p-6 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-4 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold mb-2 text-green-900 dark:text-green-100" data-testid={`solution-heading-${index}`}>
+                      Solution
+                    </h3>
+                    <p className="text-sm text-green-800 dark:text-green-200" data-testid={`solution-text-${index}`}>
+                      {item.solution}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
 
