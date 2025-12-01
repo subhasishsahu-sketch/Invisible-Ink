@@ -66,24 +66,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/random-image", async (req, res) => {
     try {
-      const urls = [
-        "https://source.unsplash.com/random/800x600/?landscape",
-        "https://source.unsplash.com/random/800x600/?nature",
-        "https://source.unsplash.com/random/800x600/?abstract",
-        "https://source.unsplash.com/random/800x600/?texture",
-        "https://source.unsplash.com/random/800x600/?art"
-      ];
-      
-      const randomUrl = urls[Math.floor(Math.random() * urls.length)];
+      const randomId = Math.floor(Math.random() * 1000);
+      const imageUrl = `https://picsum.photos/800/600?random=${randomId}`;
       
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 10000);
       
-      const response = await fetch(randomUrl, {
-        redirect: "follow",
-        headers: {
-          'User-Agent': 'Mozilla/5.0'
-        },
+      const response = await fetch(imageUrl, {
         signal: controller.signal
       });
       
@@ -96,16 +85,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const arrayBuffer = await response.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       const base64 = buffer.toString("base64");
-      const contentType = response.headers.get("content-type") || "image/jpeg";
       
       res.json({
         success: true,
-        image: `data:${contentType};base64,${base64}`
+        image: `data:image/jpeg;base64,${base64}`
       });
     } catch (error) {
       console.error("Random image error:", error);
       res.status(500).json({ 
-        error: "Failed to fetch random image from Unsplash. Please upload an image instead." 
+        error: "Failed to fetch random image. Please upload an image instead." 
       });
     }
   });
