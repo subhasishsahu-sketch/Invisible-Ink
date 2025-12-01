@@ -41,29 +41,29 @@ const problems = [
 
 export default function ProblemsAndSolutions() {
   return (
-    <section id="problems" className="py-12 lg:py-16 bg-muted/20">
+    <section id="problems" className="py-8 lg:py-12 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold mb-2" data-testid="text-problems-title">
+        <div className="text-center mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-1" data-testid="text-problems-title">
             Common Problems & Solutions
           </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto" data-testid="text-problems-description">
-            Your hidden message can be lost if the image is modified. Here's what to watch out for.
+          <p className="text-[11px] sm:text-xs text-muted-foreground max-w-2xl mx-auto" data-testid="text-problems-description">
+            Keep your encoded image safe from modifications.
           </p>
         </div>
 
-        <div className="space-y-2 sm:space-y-3 max-w-4xl mx-auto" data-testid="problems-grid">
+        <div className="space-y-1.5 sm:space-y-2 max-w-5xl mx-auto" data-testid="problems-grid">
           {problems.map((item, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-2 sm:gap-3" data-testid={`problem-row-${index}`}>
+            <div key={index} className="grid lg:grid-cols-2 gap-1.5 sm:gap-2" data-testid={`problem-row-${index}`}>
               {/* Problem Card */}
-              <Card className="p-3 sm:p-4 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-4 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
-                <div className="flex items-start gap-2">
-                  <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" data-testid={`problem-icon-${index}`} />
-                  <div className="flex-1">
-                    <h3 className="text-xs sm:text-sm font-semibold mb-1 text-amber-900 dark:text-amber-100" data-testid={`problem-title-${index}`}>
+              <Card className="p-2 sm:p-3 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-3 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
+                <div className="flex items-start gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" data-testid={`problem-icon-${index}`} />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[11px] sm:text-xs font-semibold leading-tight text-amber-900 dark:text-amber-100" data-testid={`problem-title-${index}`}>
                       {item.title}
                     </h3>
-                    <p className="text-xs text-amber-800 dark:text-amber-200" data-testid={`problem-description-${index}`}>
+                    <p className="text-[10px] sm:text-xs text-amber-800 dark:text-amber-200 line-clamp-2" data-testid={`problem-description-${index}`}>
                       {item.problem}
                     </p>
                   </div>
@@ -71,14 +71,14 @@ export default function ProblemsAndSolutions() {
               </Card>
 
               {/* Solution Card */}
-              <Card className="p-3 sm:p-4 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-4 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
-                <div className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
-                  <div className="flex-1">
-                    <h3 className="text-xs sm:text-sm font-semibold mb-1 text-green-900 dark:text-green-100" data-testid={`solution-heading-${index}`}>
-                      Solution
+              <Card className="p-2 sm:p-3 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-3 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
+                <div className="flex items-start gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[11px] sm:text-xs font-semibold leading-tight text-green-900 dark:text-green-100" data-testid={`solution-heading-${index}`}>
+                      Fix
                     </h3>
-                    <p className="text-xs text-green-800 dark:text-green-200" data-testid={`solution-text-${index}`}>
+                    <p className="text-[10px] sm:text-xs text-green-800 dark:text-green-200 line-clamp-2" data-testid={`solution-text-${index}`}>
                       {item.solution}
                     </p>
                   </div>
@@ -88,12 +88,12 @@ export default function ProblemsAndSolutions() {
           ))}
         </div>
 
-        <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-3 sm:p-4 text-center" data-testid="best-practices-box">
-          <h3 className="text-xs sm:text-sm font-semibold mb-1 text-blue-900 dark:text-blue-100" data-testid="best-practices-title">
-            Best Practice
+        <div className="mt-4 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-md p-2 sm:p-3 text-center" data-testid="best-practices-box">
+          <h3 className="text-[11px] sm:text-xs font-semibold text-blue-900 dark:text-blue-100" data-testid="best-practices-title">
+            Pro Tip
           </h3>
-          <p className="text-xs text-blue-800 dark:text-blue-200" data-testid="best-practices-text">
-            Always share encoded images as file attachments or through file-sharing services. This ensures the hidden message stays safe and intact.
+          <p className="text-[10px] sm:text-xs text-blue-800 dark:text-blue-200 leading-tight">
+            Use file-sharing (email, cloud storage) instead of social media or messaging apps.
           </p>
         </div>
       </div>
