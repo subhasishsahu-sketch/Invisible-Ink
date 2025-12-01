@@ -43,27 +43,27 @@ export default function ProblemsAndSolutions() {
   return (
     <section id="problems" className="py-12 lg:py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-semibold mb-4" data-testid="text-problems-title">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-2" data-testid="text-problems-title">
             Common Problems & Solutions
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto" data-testid="text-problems-description">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto" data-testid="text-problems-description">
             Your hidden message can be lost if the image is modified. Here's what to watch out for.
           </p>
         </div>
 
-        <div className="space-y-3 sm:space-y-4 max-w-4xl mx-auto" data-testid="problems-grid">
+        <div className="space-y-2 sm:space-y-3 max-w-4xl mx-auto" data-testid="problems-grid">
           {problems.map((item, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-3 sm:gap-4" data-testid={`problem-row-${index}`}>
+            <div key={index} className="grid md:grid-cols-2 gap-2 sm:gap-3" data-testid={`problem-row-${index}`}>
               {/* Problem Card */}
-              <Card className="p-4 sm:p-6 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-4 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
-                <div className="flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" data-testid={`problem-icon-${index}`} />
+              <Card className="p-3 sm:p-4 hover-elevate transition-all bg-amber-50/50 dark:bg-amber-950/20 border-l-4 border-l-amber-600 dark:border-l-amber-400" data-testid={`problem-card-${index}`}>
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" data-testid={`problem-icon-${index}`} />
                   <div className="flex-1">
-                    <h3 className="text-base font-semibold mb-2 text-amber-900 dark:text-amber-100" data-testid={`problem-title-${index}`}>
+                    <h3 className="text-xs sm:text-sm font-semibold mb-1 text-amber-900 dark:text-amber-100" data-testid={`problem-title-${index}`}>
                       {item.title}
                     </h3>
-                    <p className="text-sm text-amber-800 dark:text-amber-200" data-testid={`problem-description-${index}`}>
+                    <p className="text-xs text-amber-800 dark:text-amber-200" data-testid={`problem-description-${index}`}>
                       {item.problem}
                     </p>
                   </div>
@@ -71,14 +71,14 @@ export default function ProblemsAndSolutions() {
               </Card>
 
               {/* Solution Card */}
-              <Card className="p-4 sm:p-6 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-4 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
+              <Card className="p-3 sm:p-4 hover-elevate transition-all bg-green-50/50 dark:bg-green-950/20 border-l-4 border-l-green-600 dark:border-l-green-400" data-testid={`solution-card-${index}`}>
+                <div className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0 mt-0.5" data-testid={`solution-icon-${index}`} />
                   <div className="flex-1">
-                    <h3 className="text-base font-semibold mb-2 text-green-900 dark:text-green-100" data-testid={`solution-heading-${index}`}>
+                    <h3 className="text-xs sm:text-sm font-semibold mb-1 text-green-900 dark:text-green-100" data-testid={`solution-heading-${index}`}>
                       Solution
                     </h3>
-                    <p className="text-sm text-green-800 dark:text-green-200" data-testid={`solution-text-${index}`}>
+                    <p className="text-xs text-green-800 dark:text-green-200" data-testid={`solution-text-${index}`}>
                       {item.solution}
                     </p>
                   </div>
@@ -88,11 +88,11 @@ export default function ProblemsAndSolutions() {
           ))}
         </div>
 
-        <div className="mt-12 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-6 text-center" data-testid="best-practices-box">
-          <h3 className="text-lg font-semibold mb-2 text-blue-900 dark:text-blue-100" data-testid="best-practices-title">
+        <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-lg p-3 sm:p-4 text-center" data-testid="best-practices-box">
+          <h3 className="text-xs sm:text-sm font-semibold mb-1 text-blue-900 dark:text-blue-100" data-testid="best-practices-title">
             Best Practice
           </h3>
-          <p className="text-sm text-blue-800 dark:text-blue-200" data-testid="best-practices-text">
+          <p className="text-xs text-blue-800 dark:text-blue-200" data-testid="best-practices-text">
             Always share encoded images as file attachments or through file-sharing services. This ensures the hidden message stays safe and intact.
           </p>
         </div>
